@@ -5,10 +5,6 @@ from to_do import ToDo
 #import the to_do.python
 #should these tests be booleans? --if an error is caught then the test fails
 #how should we test?: test with mock update data to see if api works
-def mock_info:
-    with open("https://jsonplaceholder.typicode.com/todos") as f:
-        return json.load(f)
-
 class TestToDo(unittest.TestCase):
     def test_get_projects(self, get_projects, mocker, fake_weather_info):
         #tests if the projects can be taken from to-do-ist
