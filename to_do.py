@@ -1,3 +1,4 @@
+class ToDo:
 #This is a document where a ToDoist API was implemented
 #However this implementation would require a UI where a user would be prompted to enter in their credentials
 #We haven't learned that yet...
@@ -5,87 +6,42 @@ import requests
 import json
 import pdb
 import os
-from todoist_api_python.api import TodoistAPI
+#get request
+url = 'https://jsonplaceholder.typicode.com/todos'
+response = requests.posts(url)
 
-#AUTHORIZATION
-#the curl code allows a visual of what users should be getting redirected to 
-#curl -v -X POST https://todoist.com/oauth/authorize?client_id=b065b475909a4866adc110b57d6cf5b6&scope=data:read,data:delete&state=secretstring
-CURL_URL = "https://todoist.com/oauth/authorize?client_id=b065b475909a4866adc110b57d6cf5b6&scope=data:read,data:delete&state=secretstring"
-AUTH_URL = "https://todoist.com/oauth/authorize"
-CLIENT_ID = "b065b475909a4866adc110b57d6cf5b6" #the unique client ID of the registered ToDoist app
-SECRETSTRING = "SEO2023"
-#get the client ID and set the scope of the to do list
-auth_response = requests.post(AUTH_URL, {
-'client_id' : CLIENT_ID,
-'state' : SECRETSTRING,
-'scope' : {"task" : "add" , "data" : "read" , "data" : "read_write" , "data" : "delete" , "project" : "delete"} 
-})
+print('Response status code:', response.status_code)
+print('Response content:', response.content)
+print('Response JSON data:', response.json)
 
-print(auth_response)
-print(auth_response.status_code)
+ # Post request , ask cassidy about ID and USERID
+ data = {'title': 'delectus aut autem', 'body':'', 'userId': }
 
-    
-#Formating with JSON 
-get_check = requests.get(CURL_URL).json()
-data = auth_response.json()
-'''
-auth_code = auth_response_data['code']
-POST_URL = "https://todoist.com/oauth/access_token"
-token_response = requests.get
-'''
+response = requests.post(api,data)
+#where we send the HTTP POST request to the api using request.post - the parameters contain the api and payload (data) to be sent in the request body
 
-#tfetching a list of the users tasks
+print(response.status_code)
+ #prints the status code of the HTTP response that the server recieved 
+
+print(response.json())
+ #prints the response as a json
+ #note: response.json()- converts the response body into a dictionary***
 
 
-api = TodoistAPI("8959c09a77aac1924ee195278acccdb0e929d358")
-
-def get_projects(api):
-    #might need to change the api in quotes to a different key
-    try:
-        projects = api.get_projects() 
-        print(projects)
-    except Exception as error:
-        print(error)
 
 
-#adding a new project
-def make_new_projects(api):
-    try:
-        project = api.add_project(name="Shopping List")
-        project_id = project['id']
-        print(project)
-    except Exception as error:
-        print(error)
-
-#adding a new task
-def new_task(api):
-    try:
-        task = api.add_task(content="Buy Milk", project_id=project_id)
-        taskID = task['id']
-        print(task)
-    except Exception as error:
-        print(error)
+def get_projects():
+    #get information from the api
 
 #updating a new task
-def update_task(api):
-    try:
-        is_success = api.update_task(task_id=taskID, due_string="tomorrow")
-        print(is_success)
-    except Exception as error:
-        print(error)
+def update_task():
+   #just update the infromation using SQL
+   #this is important because we will mostly be updating information in the api
 
 #completing a task
-def complete_task(api):
-    try:
-        is_success = api.close_task(task_id=taskID)
-        print(is_success)
-    except Exception as error:
-        print(error)
+def complete_task():
+    #just set task in database to complete
 
 #deleting a project
-def del_project(api):
-    try:
-        is_success = api.delete_project(project_id=project_id)
-        print(is_success)
-    except Exception as error:
-        print(error)
+def del_item():
+    
