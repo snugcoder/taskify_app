@@ -6,7 +6,6 @@ class ToDo:
 #This is a document where a ToDoist API was implemented
 #However this implementation would require a UI where a user would be prompted to enter in their credentials
 #We haven't learned that yet..
-
     def __init__(self, url):
         self.url = url
         self.response = requests.get(self.url)
@@ -117,6 +116,7 @@ run_to_do()
 
 '''
 #get request
+
 url = 'https://jsonplaceholder.typicode.com/todos'
 response = requests.get(url)
 
